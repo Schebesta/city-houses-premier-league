@@ -9,60 +9,63 @@
         
         :root {
             --bg-color: #111;
-            --text-main: #fff;
-            --text-muted: #888;
+            --text-main: #ddd;
+            --text-muted: #777;
             --red-accent: #E63946;
             --grid-line: #333;
         }
 
         body { 
             margin: 0; 
-            padding: 40px; 
+            padding: 60px 40px; 
             background: var(--bg-color); 
             color: var(--text-main); 
             font-family: 'Space Mono', monospace; 
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
             display: flex;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Physical texture effects */
+        .texture-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 9999;
+            /* Fold lines */
+            background: 
+                linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.4) 50.5%, transparent 51%),
+                linear-gradient(0deg, transparent 49.5%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.4) 50.5%, transparent 51%),
+                radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+            mix-blend-mode: multiply;
+        }
+
+        /* Grit and noise using SVG filter in CSS */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         .container {
             max-width: 1000px;
             width: 100%;
             position: relative;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0; left: 50%;
-            width: 2px;
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .container::after {
-            content: '';
-            position: absolute;
-            top: 50%; bottom: 0; left: 0; right: 0;
-            height: 2px;
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            z-index: 0;
-            pointer-events: none;
+            z-index: 10;
+            /* Slight rotation for realism */
+            transform: rotate(-0.5deg);
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.8));
         }
 
         header {
-            border-left: 8px solid var(--red-accent);
-            padding-left: 20px;
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 1;
+            border-left: 10px solid var(--red-accent);
+            padding-left: 25px;
+            margin-bottom: 60px;
         }
 
         h1 {
@@ -70,64 +73,70 @@
             text-transform: uppercase;
             color: var(--red-accent);
             margin: 0;
-            font-size: 4rem;
-            line-height: 1;
-            letter-spacing: 2px;
+            font-size: 5rem;
+            line-height: 0.9;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(230,57,70,0.4), 2px 2px 0px rgba(0,0,0,1);
         }
 
         h2 {
             font-family: 'Space Mono', monospace;
             color: var(--text-muted);
-            margin: 10px 0 0 0;
-            font-size: 1.2rem;
+            margin: 15px 0 0 0;
+            font-size: 1.4rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            position: relative;
-            z-index: 1;
-            background: rgba(17, 17, 17, 0.8);
+            background: rgba(17, 17, 17, 0.9);
+            border: 2px solid #222;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         th {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--red-accent);
             text-transform: uppercase;
             letter-spacing: 2px;
-            padding: 20px 15px;
+            padding: 25px 20px;
             text-align: left;
-            border-bottom: 2px solid var(--red-accent);
+            border-bottom: 4px solid var(--red-accent);
+            background: #151515;
         }
 
         .venue-header {
             color: var(--text-muted);
             font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 1rem;
             display: block;
             margin-top: 5px;
             letter-spacing: 1px;
         }
 
         td {
-            padding: 25px 15px;
+            padding: 20px;
             border-bottom: 1px solid var(--grid-line);
+            border-right: 1px solid #222;
             vertical-align: top;
         }
+        td:last-child { border-right: none; }
 
         .round-col {
             width: 15%;
             font-weight: bold;
             color: var(--red-accent);
+            background: #151515;
+            font-size: 1.1rem;
         }
 
         .date-sub {
             display: block;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             margin-top: 5px;
             font-weight: normal;
         }
@@ -136,46 +145,35 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #1a1a1a;
-            padding: 10px 15px;
-            border-left: 3px solid #333;
-            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            text-shadow: 0 0 1px rgba(255,255,255,0.3);
         }
 
-        .match:hover {
-            border-left-color: var(--red-accent);
-            background: #222;
-        }
-
-        .team {
-            flex: 1;
-        }
-
-        .team-right {
-            text-align: right;
-        }
+        .team { flex: 1; }
+        .team-right { text-align: right; }
 
         .vs {
             color: var(--red-accent);
             font-size: 0.8rem;
             margin: 0 15px;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        /* Dark Mofo style branding */
         .branding {
             text-align: right;
-            margin-top: 60px;
+            margin-top: 80px;
             font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.05);
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.08);
             text-transform: uppercase;
-            letter-spacing: 5px;
-            pointer-events: none;
+            letter-spacing: 8px;
         }
     </style>
 </head>
 <body>
+    <div class="texture-overlay"></div>
+    <div class="noise"></div>
+    
     <div class="container">
         <header>
             <h1>City Houses<br>Premier League</h1>
