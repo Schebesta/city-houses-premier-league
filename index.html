@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Houses Premier League - A Grade</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --bg-color: #111;
+            --text-main: #fff;
+            --text-muted: #888;
+            --red-accent: #E63946;
+            --grid-line: #333;
+        }
+
+        body { 
+            margin: 0; 
+            padding: 40px; 
+            background: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: 'Space Mono', monospace; 
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            width: 2px;
+            background: rgba(255,255,255,0.03);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 50%; bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.03);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            border-left: 8px solid var(--red-accent);
+            padding-left: 20px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            color: var(--red-accent);
+            margin: 0;
+            font-size: 4rem;
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-muted);
+            margin: 10px 0 0 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            position: relative;
+            z-index: 1;
+            background: rgba(17, 17, 17, 0.8);
+        }
+
+        th {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--red-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 20px 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--red-accent);
+        }
+
+        .venue-header {
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 25px 15px;
+            border-bottom: 1px solid var(--grid-line);
+            vertical-align: top;
+        }
+
+        .round-col {
+            width: 15%;
+            font-weight: bold;
+            color: var(--red-accent);
+        }
+
+        .date-sub {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .match {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            padding: 10px 15px;
+            border-left: 3px solid #333;
+            transition: all 0.2s ease;
+        }
+
+        .match:hover {
+            border-left-color: var(--red-accent);
+            background: #222;
+        }
+
+        .team {
+            flex: 1;
+        }
+
+        .team-right {
+            text-align: right;
+        }
+
+        .vs {
+            color: var(--red-accent);
+            font-size: 0.8rem;
+            margin: 0 15px;
+            opacity: 0.7;
+        }
+
+        /* Dark Mofo style branding */
+        .branding {
+            text-align: right;
+            margin-top: 60px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>City Houses<br>Premier League</h1>
+            <h2>A Grade Draw / Winter 2026</h2>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Venue 1 <span class="venue-header">BONDI</span></th>
+                    <th>Venue 2 <span class="venue-header">UUSC</span></th>
+                    <th>Venue 3 <span class="venue-header">SYD UNI</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Round 1 -->
+                <tr>
+                    <td class="round-col">ROUND 1<span class="date-sub">22-JUN</span></td>
+                    <td><div class="match"><span class="team">Bondi P2</span><span class="vs">v</span><span class="team team-right">Elanora</span></div></td>
+                    <td><div class="match"><span class="team">UUSC</span><span class="vs">v</span><span class="team team-right">Dgen</span></div></td>
+                    <td><div class="match"><span class="team">CBA</span><span class="vs">v</span><span class="team team-right">Bondi P1</span></div></td>
+                </tr>
+                <!-- Round 2 -->
+                <tr>
+                    <td class="round-col">ROUND 2<span class="date-sub">29-JUN</span></td>
+                    <td><div class="match"><span class="team">Bondi P1</span><span class="vs">v</span><span class="team team-right">Bondi P2</span></div></td>
+                    <td><div class="match"><span class="team">Elanora</span><span class="vs">v</span><span class="team team-right">UUSC</span></div></td>
+                    <td><div class="match"><span class="team">Dgen</span><span class="vs">v</span><span class="team team-right">CBA</span></div></td>
+                </tr>
+                <!-- Round 3 -->
+                <tr>
+                    <td class="round-col">ROUND 3<span class="date-sub">06-JUL</span></td>
+                    <td><div class="match"><span class="team">CBA</span><span class="vs">v</span><span class="team team-right">Bondi P2</span></div></td>
+                    <td><div class="match"><span class="team">UUSC</span><span class="vs">v</span><span class="team team-right">Bondi P1</span></div></td>
+                    <td><div class="match"><span class="team">Dgen</span><span class="vs">v</span><span class="team team-right">Elanora</span></div></td>
+                </tr>
+                <!-- Round 4 -->
+                <tr>
+                    <td class="round-col">ROUND 4<span class="date-sub">13-JUL</span></td>
+                    <td><div class="match"><span class="team">Bondi P1</span><span class="vs">v</span><span class="team team-right">Dgen</span></div></td>
+                    <td><div class="match"><span class="team">Bondi P2</span><span class="vs">v</span><span class="team team-right">UUSC</span></div></td>
+                    <td><div class="match"><span class="team">Elanora</span><span class="vs">v</span><span class="team team-right">CBA</span></div></td>
+                </tr>
+                <!-- Round 5 -->
+                <tr>
+                    <td class="round-col">ROUND 5<span class="date-sub">20-JUL</span></td>
+                    <td><div class="match"><span class="team">Elanora</span><span class="vs">v</span><span class="team team-right">Bondi P1</span></div></td>
+                    <td><div class="match"><span class="team">CBA</span><span class="vs">v</span><span class="team team-right">UUSC</span></div></td>
+                    <td><div class="match"><span class="team">Dgen</span><span class="vs">v</span><span class="team team-right">Bondi P2</span></div></td>
+                </tr>
+                <!-- Round 6 -->
+                <tr>
+                    <td class="round-col">ROUND 6<span class="date-sub">27-JUL</span></td>
+                    <td><div class="match"><span class="team">Bondi P1</span><span class="vs">v</span><span class="team team-right">CBA</span></div></td>
+                    <td><div class="match"><span class="team">Dgen</span><span class="vs">v</span><span class="team team-right">UUSC</span></div></td>
+                    <td><div class="match"><span class="team">Elanora</span><span class="vs">v</span><span class="team team-right">Bondi P2</span></div></td>
+                </tr>
+                <!-- Round 7 -->
+                <tr>
+                    <td class="round-col">ROUND 7<span class="date-sub">10-AUG</span></td>
+                    <td><div class="match"><span class="team">Bondi P2</span><span class="vs">v</span><span class="team team-right">Bondi P1</span></div></td>
+                    <td><div class="match"><span class="team">UUSC</span><span class="vs">v</span><span class="team team-right">Elanora</span></div></td>
+                    <td><div class="match"><span class="team">CBA</span><span class="vs">v</span><span class="team team-right">Dgen</span></div></td>
+                </tr>
+                <!-- Round 8 -->
+                <tr>
+                    <td class="round-col">ROUND 8<span class="date-sub">17-AUG</span></td>
+                    <td><div class="match"><span class="team">Bondi P2</span><span class="vs">v</span><span class="team team-right">CBA</span></div></td>
+                    <td><div class="match"><span class="team">Bondi P1</span><span class="vs">v</span><span class="team team-right">UUSC</span></div></td>
+                    <td><div class="match"><span class="team">Elanora</span><span class="vs">v</span><span class="team team-right">Dgen</span></div></td>
+                </tr>
+                <!-- Round 9 -->
+                <tr>
+                    <td class="round-col">ROUND 9<span class="date-sub">24-AUG</span></td>
+                    <td><div class="match"><span class="team">Dgen</span><span class="vs">v</span><span class="team team-right">Bondi P1</span></div></td>
+                    <td><div class="match"><span class="team">UUSC</span><span class="vs">v</span><span class="team team-right">Bondi P2</span></div></td>
+                    <td><div class="match"><span class="team">CBA</span><span class="vs">v</span><span class="team team-right">Elanora</span></div></td>
+                </tr>
+                <!-- Round 10 -->
+                <tr>
+                    <td class="round-col">ROUND 10<span class="date-sub">31-AUG</span></td>
+                    <td><div class="match"><span class="team">Bondi P1</span><span class="vs">v</span><span class="team team-right">Elanora</span></div></td>
+                    <td><div class="match"><span class="team">UUSC</span><span class="vs">v</span><span class="team team-right">CBA</span></div></td>
+                    <td><div class="match"><span class="team">Bondi P2</span><span class="vs">v</span><span class="team team-right">Dgen</span></div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="branding">
+            SQUASH + SYDNEY CBD
+        </div>
+    </div>
+</body>
+</html>
