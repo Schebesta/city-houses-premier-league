@@ -102,6 +102,12 @@
             object-fit: cover;
             filter: grayscale(100%) contrast(120%);
             mix-blend-mode: luminosity;
+            transition: all 0.3s ease;
+        }
+        
+        .player-card:hover .player-image img {
+            filter: grayscale(0%) contrast(100%);
+            mix-blend-mode: normal;
         }
 
         .name {
