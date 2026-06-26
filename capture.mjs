@@ -14,5 +14,8 @@ const __dirname = path.dirname(__filename);
 
   await page.goto(`file://${__dirname}/street-poster.html`);
   await page.screenshot({ path: `${__dirname}/poster-v2.png`, type: 'png', fullPage: true });
+
+  await page.goto(`file://${__dirname}/dark-mofo.html`);
+  await page.screenshot({ path: `${__dirname}/dark-mofo.png`, type: 'png', fullPage: true });
   await browser.close();
 })();
