@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sydney CBD Premier League - Player Quadrant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #111;
+            --grid-line: #444;
+            --text-main: #fff;
+            --red-accent: #e50914;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Oswald', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: var(--red-accent);
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-container {
+            position: relative;
+            width: 90vw;
+            max-width: 800px;
+            aspect-ratio: 1;
+            background: #1a1a1a;
+            border: 2px solid var(--grid-line);
+            margin-bottom: 40px;
+        }
+
+        /* The Grid Lines */
+        .quadrant-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--grid-line);
+            z-index: 1;
+        }
+
+        .quadrant-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: var(--grid-line);
+            z-index: 1;
+        }
+
+        /* Axis Labels */
+        .axis-label {
+            position: absolute;
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 2;
+        }
+
+        .y-top { top: -30px; left: 50%; transform: translateX(-50%); }
+        .y-bottom { bottom: -30px; left: 50%; transform: translateX(-50%); }
+        .x-left { top: 50%; left: -20px; transform: translateY(-50%) rotate(-90deg); transform-origin: center; }
+        .x-right { top: 50%; right: -20px; transform: translateY(-50%) rotate(90deg); transform-origin: center; }
+
+        .y-top-text { top: 10px; left: 50%; transform: translateX(-50%); }
+        .y-bottom-text { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .x-left-text { top: 50%; left: 10px; transform: translateY(-50%); }
+        .x-right-text { top: 50%; right: 10px; transform: translateY(-50%); }
+
+        /* Quadrant Names */
+        .quad-name {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 1;
+            letter-spacing: 3px;
+        }
+        .qn-tl { top: 20px; left: 20px; }
+        .qn-tr { top: 20px; right: 20px; }
+        .qn-bl { bottom: 20px; left: 20px; }
+        .qn-br { bottom: 20px; right: 20px; }
+
+        /* Player Nodes */
+        .player-node {
+            position: absolute;
+            transform: translate(-50%, 50%); /* Center on coordinates (bottom-left origin) */
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .player-node:hover {
+            transform: translate(-50%, 50%) scale(1.1);
+            z-index: 20;
+        }
+
+        .player-img {
+            border-radius: 50%;
+            border: 2px solid var(--red-accent);
+            background: #000;
+            object-fit: cover;
+            object-position: top;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+            /* Size gets set inline based on athleticism */
+        }
+
+        .player-label {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            white-space: nowrap;
+            border: 1px solid var(--grid-line);
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Player Style Analysis</h1>
+        <h2>CBD Premier League Gartner Quadrant</h2>
+    </header>
+
+    <div class="quadrant-container">
+        <!-- Labels -->
+        <div class="axis-label y-top-text">High Shot Maker</div>
+        <div class="axis-label y-bottom-text">Low Shot Maker</div>
+        <div class="axis-label x-left-text">Low Attritional</div>
+        <div class="axis-label x-right-text">High Attritional</div>
+
+        <div class="quad-name qn-tl">The Maverick</div>
+        <div class="quad-name qn-tr">The Master</div>
+        <div class="quad-name qn-bl">The Traditional</div>
+        <div class="quad-name qn-br">The Grinder</div>
+
+        <!-- Players -->
+        <!-- Image sizes scaled by Athleticism: width = 40 + (Athletic * 4) -->
+        
+        <!-- Jake Robertson: Attr 8, Shot 5, Ath 6 -> Size: 64px -->
+        <div class="player-node" style="left: 80%; bottom: 50%;">
+            <img src="assets/jake-robertson.png" class="player-img" style="width: 64px; height: 64px;" alt="Jake Robertson">
+            <div class="player-label">Jake Robertson</div>
+        </div>
+
+        <!-- Matt Karwalski: Attr 2, Shot 10, Ath 2 -> Size: 48px -->
+        <div class="player-node" style="left: 20%; bottom: 100%;">
+            <img src="assets/matt-karwalski.png" class="player-img" style="width: 48px; height: 48px;" alt="Matt Karwalski">
+            <div class="player-label">Matt Karwalski</div>
+        </div>
+
+        <!-- Brad Fullick: Attr 8, Shot 3, Ath 10 -> Size: 80px -->
+        <div class="player-node" style="left: 80%; bottom: 30%;">
+            <img src="assets/brad-fullick.png" class="player-img" style="width: 80px; height: 80px;" alt="Brad Fullick">
+            <div class="player-label">Brad Fullick</div>
+        </div>
+
+        <!-- Kasper Cheung: Attr 7, Shot 4, Ath 9 -> Size: 76px -->
+        <div class="player-node" style="left: 70%; bottom: 40%;">
+            <img src="assets/kasper-cheung.png" class="player-img" style="width: 76px; height: 76px;" alt="Kasper Cheung">
+            <div class="player-label">Kasper Cheung</div>
+        </div>
+
+        <!-- Matt Arnold: Attr 8, Shot 6, Ath 3 -> Size: 52px -->
+        <div class="player-node" style="left: 80%; bottom: 60%;">
+            <img src="assets/matt-arnold.png" class="player-img" style="width: 52px; height: 52px;" alt="Matt Arnold">
+            <div class="player-label">Matt Arnold</div>
+        </div>
+
+        <!-- Doug Odewahn-Oxley: Attr 8, Shot 6, Ath 1 -> Size: 44px -->
+        <div class="player-node" style="left: 80%; bottom: 60%; margin-left: -30px; margin-bottom: 20px;">
+            <img src="assets/doug-odewahn-oxley.png" class="player-img" style="width: 44px; height: 44px;" alt="Doug Odewahn-Oxley">
+            <div class="player-label">Doug O-O</div>
+        </div>
+
+        <!-- Jackson Wylie: Attr 9, Shot 1, Ath 10 -> Size: 80px -->
+        <div class="player-node" style="left: 90%; bottom: 10%;">
+            <img src="assets/jackson-wylie.png" class="player-img" style="width: 80px; height: 80px;" alt="Jackson Wylie">
+            <div class="player-label">Jackson Wylie</div>
+        </div>
+
+        <!-- Jack Webster: Attr 8, Shot 2, Ath 4 -> Size: 56px -->
+        <div class="player-node" style="left: 80%; bottom: 20%;">
+            <img src="assets/jack-webster.png" class="player-img" style="width: 56px; height: 56px;" alt="Jack Webster">
+            <div class="player-label">Jack Webster</div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div><strong>X-Axis:</strong> Attritional Rating</div>
+        <div><strong>Y-Axis:</strong> Shot Maker Rating</div>
+        <div><strong>Bubble Size:</strong> Athleticism</div>
+    </div>
+
+</body>
+</html>
